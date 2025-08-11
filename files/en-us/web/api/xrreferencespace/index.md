@@ -37,8 +37,10 @@ The types of reference space are listed in the table below, with brief informati
   - : An {{domxref("XRBoundedReferenceSpace")}} similar to the `local` type, except the user is not expected to move outside a predetermined boundary, given by the {{domxref("XRBoundedReferenceSpace.boundsGeometry", "boundsGeometry")}} in the returned object.
 - `local`
   - : An `XRReferenceSpace` tracking space whose native origin is located near the viewer's position at the time the session was created. The exact position depends on the underlying platform and implementation. The user isn't expected to move much if at all beyond their starting position, and tracking is optimized for this use case. For devices with six degrees of freedom (6DoF) tracking, the `local` reference space tries to keep the origin stable relative to the environment.
+  - Recenter behavior: Recentering will affect all three axes. For example, if the user crouches down and recenters, the virtual world will shift downward. This effectively lowers the environment relative to the real world.
 - `local-floor`
   - : An `XRReferenceSpace` similar to the `local` type, except the starting position is placed in a safe location for the viewer to stand, where the value of the y axis is 0 at floor level. If that floor level isn't known, the {{Glossary("user agent")}} will estimate the floor level. If the estimated floor level is non-zero, the browser is expected to round it such a way as to avoid [fingerprinting](/en-US/docs/Glossary/Fingerprinting) (likely to the nearest centimeter).
+  - Recenter behavior: Recentering will only affect the horizontal axes. For example, if the user crouches down and recenters, the virtual world will remain at the same vertical level. This preserves alignment with the real world floor.
 - `unbounded`
   - : An `XRReferenceSpace` tracking space which allows the user total freedom of movement, possibly over extremely long distances from their origin point. The viewer isn't tracked at all; tracking is optimized for stability around the user's current position, so the native origin may drift as needed to accommodate that need.
 - `viewer`
